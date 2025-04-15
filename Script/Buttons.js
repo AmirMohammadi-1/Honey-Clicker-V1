@@ -209,6 +209,8 @@ class BuildingButton extends buyableButton{
 			this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost: <br>
 			${Math.floor(this.price)}<br>adds ${this.#rate}pp`);
 
+			const sound2 = new Audio('Audio/Upgrade.mp3');
+        	sound2.play();
 		}
 	}
 
@@ -275,6 +277,9 @@ class UpgradeButton extends buyableButton{
 			//prints out the new button for upgrades reflecting the changes:
 			this.updateText(`${this.#numberOfUpgrades} ${this.name}<br>Cost: <br> ${this.price}<br> increases 
 				${this.#buildingButton.name} <br> Prod by x${UpgradeButton.#UPGRADE_COST_INCREASE}`);
+				
+			const sound3 = new Audio('Audio/PotatoOverdrive.mp3');
+			sound3.play();	
 		}
 	}
 }
@@ -312,12 +317,15 @@ class BonusButton extends Button{
 		this.counter.updateMultiplier(this.#multiplier);//increases the multiplier
 
 		//shows a message for how much and how long the pps gets increased
-		this.counter.showMessage(`multiplying pps by ${this.#multiplier} for ${this.#duration} seconds`);
+		this.counter.showMessageReward(`multiplying pps by ${this.#multiplier} for ${this.#duration} seconds`);
 
 		//timer to have the increase pps stop after a certain duration
 		setTimeout(() => {this.counter.updateMultiplier(1/this.#multiplier);},
 			this.#duration * Counter.SECOND_IN_MS);
 		this.hideButton(); //hides the button
+
+		const sound4 = new Audio('Audio/PowerUp.mp3');
+		sound4.play();
 	}
 
 	//to make button visible:

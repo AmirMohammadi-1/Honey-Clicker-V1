@@ -37,8 +37,10 @@ class Counter
 	#name;  //id of the counter in the html file
 	#htmlCounter;  //the html element representing the counter
 	#htmlPPS;  //the html element representing the pps
+	#htmlMessageRewardBox 
 	#htmlMessage;  //the html element for showing a message
 	#htmlAchievement;  //the html element for showing an achievement
+	#htmlRewardBox; // the html element for showing the current reward multiplier
 	#rate;  //the pps value
 	#multiplier;  //a pps multipler (1 by default)
 	#bonusButtonList;  //a list of all BonusButtons
@@ -57,14 +59,16 @@ class Counter
 	//
 	//Constructor
 	//
-	constructor(name, pps, messageBox, achievementBox)
+	constructor(name, pps, messageBox, messageRewardBox, achievementBox, rewardBox)
 	{
 		this.#count = 0;
 		this.#name = name;
 		this.#htmlCounter = document.getElementById(name);
 		this.#htmlPPS = document.getElementById(pps);
 		this.#htmlMessage = document.getElementById(messageBox);
+		this.#htmlMessageRewardBox = document.getElementById(messageRewardBox);
 		this.#htmlAchievement = document.getElementById(achievementBox);
+		this.#htmlRewardBox = document.getElementById(rewardBox);
 		this.#rate = 1;
 		this.#multiplier = 1;
 		this.#initCounter();
@@ -97,7 +101,7 @@ class Counter
 		//
 		this.#count += (this.#rate * this.#multiplier) * (Counter.#INTERVAL / Counter.SECOND_IN_MS);
 
-		this.#htmlCounter.innerText = `Counter: ${Math.round(this.#count)} potatoes`; // Display the counter
+		this.#htmlCounter.innerText = `${Math.round(this.#count)} potatoes`; // Display the counter
 		this.#htmlPPS.innerText = `Potatoes per second: ${(this.#rate * this.#multiplier)} pps`;
 
 		//prints achievements on powers of 10:
@@ -110,7 +114,7 @@ class Counter
 
 		//uses the fact this method handles intervals and converts those to seconds to a create 90 second intervals
 		//between bonus potato's
-		if(this.#bonusButtonIntervalTracker === 90 * Counter.SECOND_IN_MS){
+		if(this.#bonusButtonIntervalTracker === 50 * Counter.SECOND_IN_MS){
 			this.#bonusButtonIntervalTracker = 0;
 			this.#bonusCycle();
 		}else{
@@ -135,6 +139,17 @@ class Counter
 		let theElement = this.#htmlMessage;
 		if (achievement)
 			theElement = this.#htmlAchievement;
+		theElement.innerHTML = theMessage;
+		theElement.classList.remove("hidden");
+		//The following statement will make theElement invisible again after [time] seconds
+		setTimeout(() => {theElement.classList.add("hidden");}, time*Counter.SECOND_IN_MS);
+	}
+
+	showMessageReward(theMessage, time=Counter.DEFAULT_MESSAGE_DURATION, achievement = false)  //time is in seconds;
+	{
+		let theElement = this.#htmlMessageRewardBox;
+		if (achievement)
+			theElement = this.#htmlRewardBox;
 		theElement.innerHTML = theMessage;
 		theElement.classList.remove("hidden");
 		//The following statement will make theElement invisible again after [time] seconds
