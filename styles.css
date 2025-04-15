@@ -1,0 +1,94 @@
+/* Style for the container of building and upgrade buttons. */
+.image-button-container {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    background-color: white; /* Button background */
+    padding-right: 150px; /* Padding for space on the right-hand side of the button. Will be used for text. */
+    border: 2px solid black; /* Adding a border */
+    border-radius: 5px; /* Rounding the corners of the border */
+    cursor: pointer;
+}
+
+/* Style for the Big Potato Button */
+.image-bigPotato {
+    width: 500px;
+    height: auto;
+    margin-left: 75px;
+}
+
+/* Style for the image buttons (buildings and upgrades) */
+.image-button {
+    width: 200px;
+    height: auto;
+    margin-right: 10px; /* Space between image and text */
+}
+
+/* Style for the text appearing to the right of the image buttons. */
+.button-text {
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Style for the Counter */
+.counter-text {
+	color: blue;
+	font-size: 45px;
+	font-weight: bold;
+	font-family: fantasy;
+	line-height: 10px;
+}
+
+/* Style for a grid layout used to place buttons */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(300px, 470px));
+    gap: 10px; /* Space between grid items */
+}
+
+/* To hide a button */
+.hidden {
+	display: none;
+}
+
+/* Style for a bonus button */
+.image-bonus {
+    position: absolute;
+	width: 100px;
+	height: auto;
+    top: 300px;
+    left: 700px;
+    z-index: 10; /* To bring the image to the front */
+}
+
+/* Style for a regular message */
+.message {
+	background-color: #adbdf7;  /* Light blue */
+	padding: 10px;
+	position: absolute;
+	width: auto;
+	height: auto;
+	top: 90px;
+	left: 600px;
+	z-index: 5; /* To bring the text to the front */
+	border-radius: 5px;
+	font-size: 20px;
+    font-weight: bold;
+}
+
+/* Style for an achievement message */
+.achievement {
+	background-color: #ffe98f;  /* Yellow-Gold */
+	padding: 10px;
+	position: absolute;
+	width: auto;
+	height: auto;
+	top: 200px;
+	left: 700px;
+	z-index: 5; /* To bring the text to the front */
+	border-radius: 5px;
+	font-size: 20px;
+    font-weight: bold;
+}
