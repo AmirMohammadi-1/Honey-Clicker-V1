@@ -77,6 +77,10 @@ class Counter
 		this.#moduloTracker = 10;
 
 		this.#bonusButtonIntervalTracker = 0;
+
+
+		this.kachingSound = new Audio('Audio/kaching.mp3');
+		this.kachingSound.preload = "auto";
 	}
 	
 	//Top secret...
@@ -137,8 +141,11 @@ class Counter
 	showMessage(theMessage, time=Counter.DEFAULT_MESSAGE_DURATION, achievement = false)  //time is in seconds;
 	{
 		let theElement = this.#htmlMessage;
-		if (achievement)
+		if (achievement){
 			theElement = this.#htmlAchievement;
+			this.kachingSound.currentTime = 0;
+			this.kachingSound.play();
+		}
 		theElement.innerHTML = theMessage;
 		theElement.classList.remove("hidden");
 		//The following statement will make theElement invisible again after [time] seconds
@@ -148,8 +155,10 @@ class Counter
 	showMessageReward(theMessage, time=Counter.DEFAULT_MESSAGE_DURATION, achievement = false)  //time is in seconds;
 	{
 		let theElement = this.#htmlMessageRewardBox;
-		if (achievement)
+		if (achievement){
 			theElement = this.#htmlRewardBox;
+		}
+
 		theElement.innerHTML = theMessage;
 		theElement.classList.remove("hidden");
 		//The following statement will make theElement invisible again after [time] seconds
