@@ -1,7 +1,7 @@
-# Welcome to Potato Clicker
+# Welcome to Honey Clicker
 
 
-Potato clicker is in interactive idle game for all those who wish to fufill their potato'y needs!!
+Honey clicker is in interactive idle game for all those who wish to fufill their Honey bunny needs!!
 This started as a silly side project, but turned out to be a 4 hour journey through learning all of JS again, so thank you, we will likely return😏
 
 
