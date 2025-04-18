@@ -208,7 +208,7 @@ class BuildingButton extends buyableButton{
 			this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost: <br>
 			${Math.floor(this.price)}<br>adds ${this.#rate}pp`);
 
-			const sound2 = new Audio('Audio/Upgrade.mp3');
+			const sound2 = new Audio('Audio/BeeBuzz.mp3');
         	sound2.play();
 		}
 	}
