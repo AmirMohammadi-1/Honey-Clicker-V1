@@ -5,15 +5,15 @@
 // INSTRUCTOR	: Heather Matheson
 // ASSIGNMENT	: assignment 4
 //
-// REMARKS: This program creates an interactive potato clicker idle game with several components, with the point of
-//the game is to increase your pps (potato's per second) and the speed at which you get them. it is a visual
-//interactive game with a default 1pps, a big potato you can click to get one potato each time, buildings to increase
-//pps, upgrades to multiply how much the pps is increased by the buildings and peroidic Bonsu potatos that appear
-//every 90 seconds on screen, these potato's add a multiplier to total pps for a certain duration depending on the
-//type of potato clicked. there is 3 main aspects of this program, 1. the visual elements handled by the provided
+// REMARKS: This program creates an interactive comb clicker idle game with several components, with the point of
+//the game is to increase your pps (comb's per second) and the speed at which you get them. it is a visual
+//interactive game with a default 1pps, a big comb you can click to get one comb each time, buildings to increase
+//pps, upgrades to multiply how much the pps is increased by the buildings and peroidic Bonsu combs that appear
+//every 90 seconds on screen, these comb's add a multiplier to total pps for a certain duration depending on the
+//type of comb clicked. there is 3 main aspects of this program, 1. the visual elements handled by the provided
 //css and html files
 //2. the Button.js file that houses the abstract button class which is what dictates the ability for the user to
-//interact with thes screen and what result happens with different buttons (button subclasses).
+//interact with the screen and what result happens with different buttons (button subclasses).
 //3. Counter.js which holds the Counter class that handles the games logic, speed of frame updates and pps.
 //
 //
@@ -25,18 +25,18 @@ class Counter
 	//
 	// Author: Amir Mohammadi, 8001284
 	//
-	// REMARKS: This class is an overarching logic that handles how the potato's are counted up, the frame rate of the
-	//screen, enabling the clickablilty features and other logic needed for the potato clicker game.
+	// REMARKS: This class is an overarching logic that handles how the comb's are counted up, the frame rate of the
+	//screen, enabling the clickablilty features and other logic needed for the comb clicker game.
 	//
 	//-----------------------------------------
 
 	//
 	//Instance variables
 	//
-	#count;  //the current amount of potatoes held
+	#count;  //the current amount of combes held
 	#name;  //id of the counter in the html file
 	#htmlCounter;  //the html element representing the counter
-	#htmlPPS;  //the html element representing the pps
+	#htmlCPS;  //the html element representing the pps
 	#htmlMessageRewardBox 
 	#htmlMessage;  //the html element for showing a message
 	#htmlAchievement;  //the html element for showing an achievement
@@ -59,12 +59,12 @@ class Counter
 	//
 	//Constructor
 	//
-	constructor(name, pps, messageBox, messageRewardBox, achievementBox, rewardBox)
+	constructor(name, cps, messageBox, messageRewardBox, achievementBox, rewardBox)
 	{
 		this.#count = 0;
 		this.#name = name;
 		this.#htmlCounter = document.getElementById(name);
-		this.#htmlPPS = document.getElementById(pps);
+		this.#htmlCPS = document.getElementById(cps);
 		this.#htmlMessage = document.getElementById(messageBox);
 		this.#htmlMessageRewardBox = document.getElementById(messageRewardBox);
 		this.#htmlAchievement = document.getElementById(achievementBox);
@@ -94,7 +94,7 @@ class Counter
 	// #updateCounter
 	//
 	// PURPOSE: private method that regularly updates the counter and pps text, effectively keeping up with the main
-	//counting logic and frame rate. This method also keeps track of the timing between bonus potato's appearing on the
+	//counting logic and frame rate. This method also keeps track of the timing between bonus combs appearing on the
 	//screen using the intervals of frame updates. This also updates achievements on every power of 10.
 	// PARAMETERS: none
 	//
@@ -105,8 +105,8 @@ class Counter
 		//
 		this.#count += (this.#rate * this.#multiplier) * (Counter.#INTERVAL / Counter.SECOND_IN_MS);
 
-		this.#htmlCounter.innerText = `${Math.round(this.#count)} potatoes`; // Display the counter
-		this.#htmlPPS.innerText = `Potatoes per second: ${(this.#rate * this.#multiplier)} pps`;
+		this.#htmlCounter.innerText = `${Math.round(this.#count)} combs`; // Display the counter
+		this.#htmlCPS.innerText = `Combs per second: ${(this.#rate * this.#multiplier)} cps`;
 
 		//prints achievements on powers of 10:
 		if(this.#count >= this.#moduloTracker){
@@ -117,7 +117,7 @@ class Counter
 
 
 		//uses the fact this method handles intervals and converts those to seconds to a create 90 second intervals
-		//between bonus potato's
+		//between bonus combs
 		if(this.#bonusButtonIntervalTracker === 50 * Counter.SECOND_IN_MS){
 			this.#bonusButtonIntervalTracker = 0;
 			this.#bonusCycle();
@@ -166,8 +166,8 @@ class Counter
 	}
 
 
-	//increment potato count by amount param
-	//param: int amount, increase potato count by that much
+	//increment comb count by amount param
+	//param: int amount, increase comb count by that much
 	//returns: none
 	increment(amount) {
 		this.#count += amount;
@@ -180,7 +180,7 @@ class Counter
 		this.#rate += amount;
 	}
 
-	//returns potato count
+	//returns comb count
 	get count(){
 		return this.#count;
 	}

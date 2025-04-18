@@ -5,12 +5,12 @@
 // INSTRUCTOR	: Heather Matheson
 // ASSIGNMENT	: assignment 4
 //
-// REMARKS: This program creates an interactive potato clicker idle game with several components, with the point of
-//the game is to increase your pps (potato's per second) and the speed at which you get them. it is a visual
-//interactive game with a default 1pps, a big potato you can click to get one potato each time, buildings to increase
-//pps, upgrades to multiply how much the pps is increased by the buildings and peroidic Bonsu potatos that appear
-//every 90 seconds on screen, these potato's add a multiplier to total pps for a certain duration depending on the
-//type of potato clicked. there is 3 main aspects of this program, 1. the visual elements handled by the provided
+// REMARKS: This program creates an interactive comb clicker idle game with several components, with the point of
+//the game is to increase your pps (comb's per second) and the speed at which you get them. it is a visual
+//interactive game with a default 1pps, a big comb you can click to get one comb each time, buildings to increase
+//pps, upgrades to multiply how much the pps is increased by the buildings and peroidic Bonsu combs that appear
+//every 90 seconds on screen, these comb's add a multiplier to total pps for a certain duration depending on the
+//type of comb clicked. there is 3 main aspects of this program, 1. the visual elements handled by the provided
 //css and html files
 //2. the Button.js file that houses the abstract button class which is what dictates the ability for the user to
 //interact with thes screen and what result happens with different buttons (button subclasses).
@@ -121,8 +121,8 @@ class buyableButton extends Button{
 	}
 
 
-	subtractCost(){//removes the potato's that were needed to buy
-		this.counter.increment(-this.#price);//remove the potatos just used to buy the upgrade
+	subtractCost(){//removes the comb's that were needed to buy
+		this.counter.increment(-this.#price);//remove the combs just used to buy the upgrade
 	}
 
 	//getters and setters:
@@ -144,11 +144,11 @@ class ClickingButton extends Button{
 	// Author: Amir Mohammadi, 8001284
 	//
 	// REMARKS: This class is a subclass of button, in particular a button that can be used to click over and over again
-	//to get potato's directly (big potato button)
+	//to get comb's directly (big comb button)
 	//
 	//
 	//-----------------------------------------
-	static get #CLICK_INCREMENT(){return 1;}//value to increment a potato when clicked
+	static get #CLICK_INCREMENT(){return 1;}//value to increment a comb when clicked
 
 
 	//constructor:
@@ -157,12 +157,12 @@ class ClickingButton extends Button{
 	}
 
 
-	//purpose: action performed when clicking a button (big potato), adds 1 potato to our inventory and prints to reflect
+	//purpose: action performed when clicking a button (big comb), adds 1 comb to our inventory and prints to reflect
 	//param: none
 	//return: none
 	clickAction(){
-		this.counter.increment(ClickingButton.#CLICK_INCREMENT);//increment up a potato
-		this.counter.showMessage("+1");//prints to show a potato was added
+		this.counter.increment(ClickingButton.#CLICK_INCREMENT);//increment up a comb
+		this.counter.showMessage("+1");//prints to show a comb was added
 	}
 
 }
@@ -198,10 +198,10 @@ class BuildingButton extends buyableButton{
 	//param: none
 	//return: none
 	clickAction(){
-		if(this.counter.count >= this.price) {//if the user has enough potato's the buy the buidling
+		if(this.counter.count >= this.price) {//if the user has enough comb's the buy the buidling
 			this.subtractCost();
 			this.#numberOfBuilding++;//increase the number of buildings
-			this.counter.updateRate(this.#rate);//update the rate at which potatos are being produced per sec.
+			this.counter.updateRate(this.#rate);//update the rate at which combs are being produced per sec.
 			this.updatePrice(this.price * BuildingButton.#BUILDING_PRICE_INCREASE);//updates the price of building
 
 
@@ -260,7 +260,7 @@ class UpgradeButton extends buyableButton{
 	}
 
 
-	//purpose: action to be performed when the button is clicked, that is buy the upgrade, remove the cost of potatos,
+	//purpose: action to be performed when the button is clicked, that is buy the upgrade, remove the cost of combs,
 	//incresae the rate of the upgraded building and increase the cost of the next upgrade.
 	//param: none
 	//return: none
@@ -278,7 +278,7 @@ class UpgradeButton extends buyableButton{
 			this.updateText(`${this.#numberOfUpgrades} ${this.name}<br>Cost: <br> ${this.price}<br> increases 
 				${this.#buildingButton.name} <br> Prod by x${UpgradeButton.#UPGRADE_COST_INCREASE}`);
 				
-			const sound3 = new Audio('Audio/PotatoOverdrive.mp3');
+			const sound3 = new Audio('Audio/combOverdrive.mp3');
 			sound3.play();	
 		}
 	}

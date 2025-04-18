@@ -5,7 +5,7 @@
 		
 		//// Creating below a Button object corresponding to each Button created above
 		//BigPotato
-		const bigPotato = new ClickingButton("BigPotato", counter);
+		const bigPotato = new ClickingButton("HoneyComb", counter);
 		
 		//The 4 types of buildings
 		const building1 = new BuildingButton("Farm", counter, 50, 1);
@@ -20,8 +20,10 @@
 		const upgrade4 = new UpgradeButton("Advanced DNA", counter, 2000000, 2, building4);
 		
 		//Creating the 5 types of bonus buttons and adding them to the counter
-		counter.addBonusButton(new BonusButton("Sweet Potato Bonus", counter, 2, 10));
-		counter.addBonusButton(new BonusButton("Red Potato Bonus", counter, 3, 15));
-		counter.addBonusButton(new BonusButton("Austrian Crescent Bonus", counter, 5, 20));
-		counter.addBonusButton(new BonusButton("Blue Potato Bonus", counter, 7, 25));
-		counter.addBonusButton(new BonusButton("Yukon Gold Bonus", counter, 10, 30));
+
+		// Old bonuses are commented out below
+		// counter.addBonusButton(new BonusButton("Sweet Potato Bonus", counter, 2, 10));
+		// counter.addBonusButton(new BonusButton("Red Potato Bonus", counter, 3, 15));
+		counter.addBonusButton(new BonusButton("HoneyPot", counter, 5, 20));
+		// counter.addBonusButton(new BonusButton("Blue Potato Bonus", counter, 7, 25));
+		// counter.addBonusButton(new BonusButton("Yukon Gold Bonus", counter, 10, 30));

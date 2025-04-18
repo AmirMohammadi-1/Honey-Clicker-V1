@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Potato Clicker</title>
+    <title>Honey Clicker</title>
 	<link rel="stylesheet" href="styles.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body style="background-color: #36393e">
-    <h1 align="center" class="title" style="color: #cab2fb;">Welcome to Potato Clicker!</h1>
-	<p align="center"class="counter-text" id="counter">0 potatoes</p>
+    <h1 align="center" class="title" style="color: #cab2fb;">Welcome to Honey Clicker!</h1>
+	<p align="center"class="counter-text" id="counter"></p>
 	
     
 
-	<p align="center" class="counter-text" id="pps">Potatoes per second: 0 pps</p>
+	<p align="center" class="counter-text" id="cps">Potatoes per second: 0 cps</p>
 	<div style="display: flex;justify-content: center;">
 		<p id="Reward Box" class="message hidden"></p>
 	</div>
@@ -24,18 +24,14 @@
 	<!-- Container for the big potato button -->
 	 <div style="display: flex; flex-direction: column; justify-content: center; place-items: center;">
 		<div style="display: flex; justify-content: center;">
-			<img class="image-bigPotato" id="BigPotato" class="image-button" src="Figs/MainTater.gif" alt="Big Potato Button">
+			<img id="HoneyComb" class="honey-comb" src="Figs/HoneyCombFinal.png" alt="Honey Comb Button">
 
 			<!-- Message boxes: regular message and achievement message. They are both initially hidden. -->
 			<div style="display: flex; flex-direction: column;">
 				<p align="center" id="Message Box" class="message hidden"></p>
-				<!-- Bonus buttons that will randomly be selected to appear. They are all initially hidden. -->
+				<!-- Bonus buttons that will randomly be selected to appear. Initially hidden.  -->
 				<div >
-					<img align="center" id="Sweet Potato Bonus" class="image-bonus hidden" src="Figs/SweetPotato.jpg" alt="Sweet Potato Button">
-					<img align="center" id="Red Potato Bonus" class="image-bonus hidden" src="Figs/RedPotato.jpg" alt="Red Potato Button">
-					<img align="center" id="Austrian Crescent Bonus" class="image-bonus hidden" src="Figs/AustrianCrescent.jpeg" alt="Austrian Crescent Potato Button">
-					<img align="center" id="Blue Potato Bonus" class="image-bonus hidden" src="Figs/BluePotato.png" alt="Blue Potato Button">
-					<img align="center" id="Yukon Gold Bonus" class="image-bonus hidden" src="Figs/YukonGold.png" alt="Yukon Gold Potato Button">
+					<img align="center" id="HoneyPot" class="image-bonus hidden" src="Figs/HoneyPot.png" alt="Sweet Potato Button">
 				</div>
 			</div>
 		</div>
@@ -55,25 +51,25 @@
 		
 		<div id="Farm" class="image-button-container" id="mt30">
 			<img  class="image-button" src="Figs/Farm.png" alt="Farm Button">
-			<span style="margin-left: 20px;" id="Farm-text" class="button-text">0 Farm<br>Cost: 50<br>Adds: 1 pps</span>
+			<span style="margin-left: 20px;" id="Farm-text" class="button-text">0 Farm<br>Cost: 50<br>Adds: 1 cps</span>
 		</div>
 		
 		<!-- Container for the Food truck building button. -->
 		<div id="Food truck" class="image-button-container" id="mt30">
 			<img  class="image-button" src="Figs/FoodTruck.png" alt="Food Truck Button">
-			<span style="margin-left: 20px;"id="Food truck-text" class="button-text">0 Food truck<br>Cost: 5000<br>Adds: 5 pps</span>
+			<span style="margin-left: 20px;"id="Food truck-text" class="button-text">0 Food truck<br>Cost: 5000<br>Adds: 5 cps</span>
 		</div>
 		
 		<!-- Container for the Chips factory building button. -->
 		<div id="Chips factory" class="image-button-container">
 			<img  class="image-button" src="Figs/Factory.png" alt="Chips factory Button">
-			<span style="margin-left: 20px;" id="Chips factory-text" class="button-text">0 Chips factory<br>Cost: 50000<br>Adds: 50 pps</span>
+			<span style="margin-left: 20px;" id="Chips factory-text" class="button-text">0 Chips factory<br>Cost: 50000<br>Adds: 50 cps</span>
 		</div>
 		
 		<!-- Container for the Potato cloner building button. -->
 		<div id="Potato cloner" class="image-button-container">
 			<img  class="image-button" src="Figs/Cloner.png" alt="Potato Cloner Button">
-			<span style="margin-left: 20px;" id="Potato cloner-text" class="button-text">0 Potato cloner<br>Cost: 200000<br>Adds: 250 pps</span>
+			<span style="margin-left: 20px;" id="Potato cloner-text" class="button-text">0 Potato cloner<br>Cost: 200000<br>Adds: 250 cps</span>
 		</div>
 		
 		<!-- Container for the Harvester upgrade button. -->

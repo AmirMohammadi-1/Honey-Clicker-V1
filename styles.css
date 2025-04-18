@@ -1,3 +1,32 @@
+/* Animations */
+
+.honey-comb {
+	animation: sway 2.5s ease-in-out infinite;
+	margin: 0 auto;
+	width: 300px;
+	height: auto;
+	display: block;
+  }
+  
+  /* Allows the honey comb to sway left, and right repeatedly */
+  @keyframes sway {
+	0% {
+	  transform: translate(0, 0) rotate(0deg);
+	}
+	25% {
+	  transform: translate(-2px, -1px) rotate(-2deg);
+	}
+	50% {
+	  transform: translate(0, 1px) rotate(0deg);
+	}
+	75% {
+	  transform: translate(2px, -1px) rotate(2deg);
+	}
+	100% {
+	  transform: translate(0, 0) rotate(0deg);
+	}
+  }
+
 /* Style for the container of building and upgrade buttons. */
 #mt30 {
 	margin-top: 30px;
@@ -18,13 +47,6 @@ body {
 	span {
 		color: #fff;
 	}
-}
-
-
-/* Style for the Big Potato Button */
-.image-bigPotato {
-    width: 300px;
-    height: auto;
 }
 
 /* Style for the image buttons (buildings and upgrades) */
@@ -119,3 +141,4 @@ body {
 		font-size: 20px;
 	}
 }
+
