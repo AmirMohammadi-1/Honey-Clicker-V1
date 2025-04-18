@@ -1,5 +1,9 @@
 /* Animations */
 
+h1 {
+	font-size: 25px;
+}
+
 .honey-comb {
 	animation: sway 2.5s ease-in-out infinite;
 	margin: 0 auto;
@@ -33,13 +37,18 @@
 }
 
 body {
-	font-family: "Pixelify Sans";
+	font-family: "Press Start 2P", monospace;
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
-  }
-  
-  .background-layer {
+}
+
+h1, h2, h3, p, span {
+	font-family: "Press Start 2P", monospace;
+	transform: scaleX(0.85); /* Try values from 0.8 to 0.95 */
+}
+
+.background-layer {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -50,13 +59,13 @@ body {
 	background-repeat: no-repeat;
 	z-index: -2;
 	transition: opacity 0.3s ease-out;
-  }
+}
   
   /* Sky at the back initially */
-  .background-layer.sky {
+.background-layer.sky {
 	background-image: url('Figs/SkyBackdrop.png');
 	opacity: 1;
-  }
+ }
   
   /* Honey on top, initially transparent */
   .background-layer.honey {
@@ -64,7 +73,7 @@ body {
 	opacity: 0;
   }
   
-  body::before {
+body::before {
 	content: "";
 	position: fixed;
 	top: 0;
@@ -79,7 +88,7 @@ body {
 	  rgba(0, 0, 0, 0.5) 80%,
 	  rgba(0, 0, 0, 0.0) 100%
 	);
-  }
+}
   
 
 .image-button-container {
@@ -147,7 +156,7 @@ body {
 	height: 20px;
 	z-index: 5; /* To bring the text to the front */
 	border-radius: 5px;
-	font-size: 20px;
+	font-size: 15px;
     font-weight: bold;
 }
 
@@ -164,7 +173,7 @@ body {
 }
 
 .counter-text {
-	font-size: 30px;
+	font-size: 20px;
 }
 
 @media screen and (max-width: 480px){
