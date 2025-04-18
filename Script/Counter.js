@@ -47,6 +47,8 @@ class Counter
 	#moduloTracker;//to keep track of power of 10 achievments
 
 	#bonusButtonIntervalTracker;//count how many bonus buttons there are.
+
+	#bonusInterval;
 	
 	//
 	//Class constants
@@ -77,10 +79,15 @@ class Counter
 		this.#moduloTracker = 10;
 
 		this.#bonusButtonIntervalTracker = 0;
+		this.randomBonusInterval();
 
 
 		this.kachingSound = new Audio('Audio/kaching.mp3');
 		this.kachingSound.preload = "auto";
+	}
+
+	randomBonusInterval(){
+		this.#bonusInterval = Math.round(Math.random() * (70 - 30) + 30);
 	}
 	
 	//Top secret...
@@ -106,7 +113,7 @@ class Counter
 		this.#count += (this.#rate * this.#multiplier) * (Counter.#INTERVAL / Counter.SECOND_IN_MS);
 
 		this.#htmlCounter.innerText = `${Math.round(this.#count)} combs`; // Display the counter
-		this.#htmlCPS.innerText = `Combs per second: ${(this.#rate * this.#multiplier)} cps`;
+		this.#htmlCPS.innerText = `Combs per second: ${Math.floor(this.#rate * this.#multiplier)} cps`;
 
 		//prints achievements on powers of 10:
 		if(this.#count >= this.#moduloTracker){
@@ -118,8 +125,9 @@ class Counter
 
 		//uses the fact this method handles intervals and converts those to seconds to a create 90 second intervals
 		//between bonus combs
-		if(this.#bonusButtonIntervalTracker === 50 * Counter.SECOND_IN_MS){
+		if(this.#bonusButtonIntervalTracker === this.#bonusInterval * Counter.SECOND_IN_MS){
 			this.#bonusButtonIntervalTracker = 0;
+			this.randomBonusInterval();
 			this.#bonusCycle();
 		}else{
 			this.#bonusButtonIntervalTracker += Counter.#INTERVAL;

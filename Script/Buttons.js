@@ -109,6 +109,7 @@ class buyableButton extends Button{
 
 	//instance var:
 	#price;
+	#basePrice;
 
 
 	//constructor:
@@ -118,6 +119,7 @@ class buyableButton extends Button{
 			throw new Error("cannot make an instance of a buyable button ");
 		}
 		this.#price = price;
+		this.#basePrice = price;
 	}
 
 
@@ -130,9 +132,16 @@ class buyableButton extends Button{
 		return this.#price;
 	}
 
-	updatePrice(newPrice){
-		this.#price = newPrice;
+	updatePrice(numOfObject){
+		this.#price = this.#basePrice * Math.pow(1.15, numOfObject);
 	}
+
+	/*
+	increaseCost(numOfObject){
+		this.#price = this.#basePrice * Math.pow(1.15, numOfObject);
+	}
+
+	 */
 
 
 
@@ -202,7 +211,7 @@ class BuildingButton extends buyableButton{
 			this.subtractCost();
 			this.#numberOfBuilding++;//increase the number of buildings
 			this.counter.updateRate(this.#rate);//update the rate at which combs are being produced per sec.
-			this.updatePrice(this.price * BuildingButton.#BUILDING_PRICE_INCREASE);//updates the price of building
+			this.updatePrice(this.#numberOfBuilding);//updates the price of building
 
 
 			//update the buttons text
@@ -229,6 +238,10 @@ class BuildingButton extends buyableButton{
 		//updates text to reflect
 		this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost: <br>
 			${Math.floor(this.price)}<br>adds ${this.#rate}pp`);
+	}
+
+	get numberOfBuilding(){
+		return this.#numberOfBuilding;
 	}
 
 }
@@ -265,11 +278,11 @@ class UpgradeButton extends buyableButton{
 	//param: none
 	//return: none
 	clickAction(){
-		if(this.counter.count >= this.price) {//checks if the user has enough to buy upgrade
+		if(this.counter.count >= this.price && this.#buildingButton.numberOfBuilding >= 1) {//checks if the user has enough to buy upgrade
 
 			this.subtractCost();//subtracts the cost from our total
 
-			this.updatePrice(this.price * UpgradeButton.#UPGRADE_COST_INCREASE);//update the price of upgrade
+			this.updatePrice(this.#numberOfUpgrades);//update the price of upgrade
 
 			this.#numberOfUpgrades++;//increments the number of upgrades to reflect the purchase
 			this.#buildingButton.increaseRate(this.#multiplier);//increase the rate of the building
@@ -316,12 +329,17 @@ class BonusButton extends Button{
 		this.showButton()//reveals the button
 		this.counter.updateMultiplier(this.#multiplier);//increases the multiplier
 
+
+		let rawMultiplier = Math.random() * (7.5 - 1.5) + 1.5;
+		let mult = Math.round(rawMultiplier * 10) / 10;
+		let seconds = Math.floor(Math.random() * (60 - 5 + 1)) + 5;
+
 		//shows a message for how much and how long the pps gets increased
-		this.counter.showMessageReward(`multiplying cps by ${this.#multiplier} for ${this.#duration} seconds`);
+		this.counter.showMessageReward(`multiplying cps by ${mult} for ${seconds} seconds`);
 
 		//timer to have the increase pps stop after a certain duration
-		setTimeout(() => {this.counter.updateMultiplier(1/this.#multiplier);},
-			this.#duration * Counter.SECOND_IN_MS);
+		setTimeout(() => {this.counter.updateMultiplier(1/mult);},
+			seconds * Counter.SECOND_IN_MS);
 		this.hideButton(); //hides the button
 
 		const sound4 = new Audio('Audio/PowerUp.mp3');
