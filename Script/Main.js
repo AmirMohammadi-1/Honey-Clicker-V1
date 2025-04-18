@@ -7,6 +7,9 @@
 		//BigPotato
 		const bigPotato = new ClickingButton("HoneyComb", counter);
 		
+		// The WorkerBee button
+		const building0 = new BuildingButton("WorkerBee", counter, 50, 1);
+
 		//The 4 types of buildings
 		const building1 = new BuildingButton("Field", counter, 50, 1);
 		const building2 = new BuildingButton("Hive", counter, 5000, 5);

@@ -76,6 +76,7 @@ class Counter
 
 
 		this.kachingSound = new Audio('Audio/kaching.mp3');
+		this.kachingSound.volume = 0.3;
 		this.kachingSound.preload = "auto";
 	}
 

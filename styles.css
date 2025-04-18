@@ -132,6 +132,21 @@ body::before {
     gap: 10px;
 }
 
+.center-wrapper {
+	display: flex;
+	place-content: center;
+	justify-content: center;
+	padding-bottom: 10px;
+}
+
+.grid-container-bw {
+	.grid-container-bw {
+		display: grid;
+		grid-template-columns: minmax(150px, 600px);
+		width: 100%;
+	}
+}
+
 /* To hide a button */
 .hidden {
 	visibility: hidden;
@@ -220,7 +235,14 @@ body::before {
 		display: grid;
 		grid-template-columns: repeat(1, minmax(150px, 600px));
 		gap: 10px;
-		padding: 20px
+		padding: 0px 20px 20px
+	}
+
+	.grid-container-bw {
+		display: grid;
+		grid-template-columns: minmax(150px, 600px); /* mimic repeat(1, ...) */
+		width: 100%;
+		padding: 20px 20px 0px 20px;
 	}
 
 	.title {

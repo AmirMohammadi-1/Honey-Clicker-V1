@@ -51,32 +51,47 @@
 
 <!------------------------------------- Upgrades and Buildings section --------------------------------------->
 	
-	<!-- Setting up a grid container for the building and upgrade buttons. 2 rows of 4 buttons. -->
-	<div class="grid-container" align="center" style="margin-bottom: 100px;">
+<!-------------------------------------------- Upgrades ------------------------------------------------------>
 
-		<!-- Container for the Field building button. -->
-		<div id="Field" class="image-button-container" id="mt30">
-			<img  class="image-button" src="Figs/Field.png" alt="Farm Button">
-			<span  id="Field-text" class="button-text">0 Field<br>Cost: 50<br>Adds: 1 cps</span>
-		</div>
-		
-		<!-- Container for the Hive building button. -->
-		<div id="Hive" class="image-button-container" id="mt30">
-			<img  class="image-button" src="Figs/Hive.png" alt="Food Truck Button">
-			<span id="Hive-text" class="button-text">0 Hive<br>Cost: 5000<br>Adds: 5 cps</span>
-		</div>
-		
-		<!-- Container for the Apiary building button. -->
-		<div id="Apiary" class="image-button-container">
-			<img  class="image-button" src="Figs/Apiary.png" alt="Apiary Button">
-			<span  id="Apiary-text" class="button-text">0 Apiary<br>Cost: 50000<br>Adds: 50 cps</span>
-		</div>
-		
-		<!-- Container for the GreenHouse building button. -->
-		<div id="Green House" class="image-button-container">
-			<img  class="image-button" src="Figs/GreenHouse.png" alt="GreenHouse Button">
-			<span id="Green House-text" class="button-text">0 Green House<br>Cost: 200000<br>Adds: 250 cps</span>
-		</div>
+	<div style="display: flex; flex-direction: column;">
+	<!-- Standalone WorkerBee button -->
+	 <div class="center-wrapper">
+	<div class="grid-container-bw">
+	   <div id="WorkerBee" class="image-button-container" id="mt30">
+		   <img  class="image-button" src="Figs/WorkerBee.png" alt="Worker Bee Button">
+		   <span id="WorkerBee-text" class="button-text">0 Worker Bee<br>Cost: 50<br>Adds: 1 cps</span>
+	   </div>
+   </div>
+	 </div>
+	 
+		<!-- Setting up a grid container for the building and upgrade buttons. 2 rows of 4 buttons. -->
+		<div class="grid-container" align="center" style="margin-bottom: 100px;">
+			<!-- Container for the Field building button. -->
+			<div id="Field" class="image-button-container" id="mt30">
+				<img  class="image-button" src="Figs/Field.png" alt="Field Button">
+				<span  id="Field-text" class="button-text">0 Field<br>Cost: 50<br>Adds: 1 cps</span>
+			</div>
+			
+			<!-- Container for the Hive building button. -->
+			<div id="Hive" class="image-button-container" id="mt30">
+				<img  class="image-button" src="Figs/Hive.png" alt="Hive Button">
+				<span id="Hive-text" class="button-text">0 Hive<br>Cost: 5000<br>Adds: 5 cps</span>
+			</div>
+			
+			<!-- Container for the Apiary building button. -->
+			<div id="Apiary" class="image-button-container">
+				<img  class="image-button" src="Figs/Apiary.png" alt="Apiary Button">
+				<span  id="Apiary-text" class="button-text">0 Apiary<br>Cost: 50000<br>Adds: 50 cps</span>
+			</div>
+			
+			<!-- Container for the GreenHouse building button. -->
+			<div id="Green House" class="image-button-container">
+				<img  class="image-button" src="Figs/GreenHouse.png" alt="Green House Button">
+				<span id="Green House-text" class="button-text">0 Green House<br>Cost: 200000<br>Adds: 250 cps</span>
+			</div>
+	
+
+<!--------------------------------------------- Buildings -------------------------------------------------------->
 		
 		<!-- Container for the Pollination upgrade button. -->
 		<div id="Pollination" class="image-button-container">
@@ -110,7 +125,7 @@
     <script src="Script/Buttons.js"></script>
 	<script src="Script/Main.js"></script>
 	<script src="Script/Sounds.js"></script>
-	
+
 <!------------------------------------------- End of file ----------------------------------------->	
 </body>
 </html>
