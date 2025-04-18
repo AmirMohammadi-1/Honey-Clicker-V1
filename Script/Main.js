@@ -27,3 +27,18 @@
 		counter.addBonusButton(new BonusButton("HoneyPot", counter, 5, 20));
 		// counter.addBonusButton(new BonusButton("Blue Potato Bonus", counter, 7, 25));
 		// counter.addBonusButton(new BonusButton("Yukon Gold Bonus", counter, 10, 30));
+
+		// Function for allowing HoneyCombBackdrop to fade in at half scroll
+		window.addEventListener('scroll', () => {
+			const scrollY = window.scrollY;
+			const windowHeight = window.innerHeight;
+		
+			// Fade in honey backdrop
+			const fadeStart = windowHeight / 10;
+			const fadeEnd = windowHeight;
+		
+			let opacity = (scrollY - fadeStart) / (fadeEnd - fadeStart);
+			opacity = Math.min(Math.max(opacity, 0), 1); // Clamp between 0–1
+		
+			document.querySelector('.background-layer.honey').style.opacity = opacity;
+		  });

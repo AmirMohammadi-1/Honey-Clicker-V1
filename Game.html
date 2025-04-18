@@ -9,23 +9,13 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 	<link rel="icon" href="Figs/favicon.png">
-	<script>
-		window.addEventListener('scroll', () => {
-		  const scrollY = window.scrollY;
-		  const windowHeight = window.innerHeight;
-	  
-		  // Fade in honey backdrop starting from halfway down
-		  const fadeStart = windowHeight / 10;
-		  const fadeEnd = windowHeight;
-	  
-		  let opacity = (scrollY - fadeStart) / (fadeEnd - fadeStart);
-		  opacity = Math.min(Math.max(opacity, 0), 1); // Clamp between 0–1
-	  
-		  document.querySelector('.background-layer.honey').style.opacity = opacity;
-		});
-	  </script>
+	
 </head>
-<body style="background-color: #36393e">
+<body>
+
+<!------------------------------------------ Counter section  ------------------------------------------------->
+
+
 	<div class="background-layer sky"></div>
 	<div class="background-layer honey"></div>
     <h1 align="center" class="title" style="color: #98FF98;">Welcome to Honey Clicker!</h1>
@@ -35,29 +25,31 @@
 		<p id="Reward Box" class="message hidden"></p>
 	</div>
 	
+<!-------------------------------- Main clicker and multiplier section --------------------------------------->
+
 	<!-- Container for the big potato button -->
 	 <div style="display: flex; flex-direction: column; justify-content: center; place-items: center;">
 		<div style="display: flex; justify-content: center; position: relative">
 			
+			<!-- Main HoneyComb button -->
 			<img id="HoneyComb" class="honey-comb" src="Figs/HoneyCombFinal.png" alt="Honey Comb Button">
-			<p align="center" id="Message Box" class="message hidden plus-one positi" ></p>
-			<!-- Message boxes: regular message and achievement message. They are both initially hidden. -->
+
+			<!-- +1 Button that is initially hidden -->
+			<p align="center" id="Message Box" class="message hidden plus-one" ></p>
+
+			<!-- Hidden HoneyPot button that applies a random multiplier -->
 			<div style="display: flex; flex-direction: column;">
-				<!-- Bonus buttons that will randomly be selected to appear. Initially hidden.  -->
 				<div >
-					<img align="center" id="HoneyPot" class="image-bonus hidden" src="Figs/HoneyPot.png" alt="Sweet Potato Button">
+					<img align="center" id="HoneyPot" class="image-bonus hidden" src="Figs/HoneyPot.png" alt="Honey Pot Multiplier">
 				</div>
 			</div>
 		</div>
+
 		<p id="Achievement Box" class="achievement hidden"></p>
+
 	</div>
 
-	
-	
-
-	
-		
-	
+<!------------------------------------- Upgrades and Buildings section --------------------------------------->
 	
 	<!-- Setting up a grid container for the building and upgrade buttons. 2 rows of 4 buttons. -->
 	<div class="grid-container" align="center" style="margin-bottom: 100px;">
@@ -112,11 +104,13 @@
 	</div>
 	<p align="center" style="text-align: center; color: #e1e2e3; font-size: 12px;">&copy; 2025 Amir Mohammadi & Riley Clark</p>
 
-	
-	<!-- Including the 2 JavaScript files used in this assignment. -->
+<!--------------------------------------------- Scripts ------------------------------------------->
+
 	<script src="Script/Counter.js"></script>
     <script src="Script/Buttons.js"></script>
 	<script src="Script/Main.js"></script>
 	<script src="Script/Sounds.js"></script>
+	
+<!------------------------------------------- End of file ----------------------------------------->	
 </body>
 </html>
