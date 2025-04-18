@@ -96,7 +96,7 @@ class Counter
 		this.#count = 50000000;
 	}
 
-	cheatCode2(){
+	cheatCodeTwo(){
 		this.#count = 10000;
 	}
 	
