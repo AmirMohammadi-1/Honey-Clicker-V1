@@ -282,9 +282,10 @@ class UpgradeButton extends buyableButton{
 
 			this.subtractCost();//subtracts the cost from our total
 
-			this.updatePrice(this.#numberOfUpgrades);//update the price of upgrade
 
 			this.#numberOfUpgrades++;//increments the number of upgrades to reflect the purchase
+			this.updatePrice(this.#numberOfUpgrades);//update the price of upgrade
+
 			this.#buildingButton.increaseRate(this.#multiplier);//increase the rate of the building
 
 			//prints out the new button for upgrades reflecting the changes:

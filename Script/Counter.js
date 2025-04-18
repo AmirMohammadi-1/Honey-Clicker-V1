@@ -95,6 +95,10 @@ class Counter
 	{
 		this.#count = 50000000;
 	}
+
+	cheatCode2(){
+		this.#count = 10000;
+	}
 	
 	//Method that regularly updates the counter and pps texts
 	//------------------------------------------------------
