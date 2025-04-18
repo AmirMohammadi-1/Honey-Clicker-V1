@@ -4,13 +4,7 @@ h1 {
 	font-size: 25px;
 }
 
-.honey-comb {
-	animation: sway 2.5s ease-in-out infinite;
-	margin: 0 auto;
-	width: 300px;
-	height: auto;
-	display: block;
-  }
+
   
   /* Allows the honey comb to sway left, and right repeatedly */
   @keyframes sway {
@@ -95,13 +89,15 @@ body::before {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    background-color: #424549; /* Button background */
+    background:  rgba(66, 69, 73, 0.5) ; /* Button background */
     padding-right: 150px; /* Padding for space on the right-hand side of the button. Will be used for text. */
     border-radius: 5px; /* Rounding the corners of the border */
     cursor: pointer;
 	span {
 		color: #fff;
 	}
+	border: #222 5px solid;
+
 }
 
 /* Style for the image buttons (buildings and upgrades) */
@@ -109,14 +105,15 @@ body::before {
     width: 200px;
     height: auto;
     margin-right: 10px; /* Space between image and text */
+	border-right: #222 5px solid;
 }
 
 /* Style for the text appearing to the right of the image buttons. */
 .button-text {
-    color: black;
     font-size: 16px;
     font-weight: bold;
     white-space: nowrap;
+	text-align: left;
 }
 
 /* Style for the Counter */
@@ -156,9 +153,24 @@ body::before {
 	height: 20px;
 	z-index: 5; /* To bring the text to the front */
 	border-radius: 5px;
-	font-size: 15px;
-    font-weight: bold;
 }
+
+.honey-comb {
+	animation: sway 2.5s ease-in-out infinite;
+	margin: 0 auto;
+	width: 300px;
+	height: auto;
+	display: block;
+	margin-top: 10px;
+}
+
+.plus-one {
+	position: absolute;
+	top: 80px; /* Adjust as needed */
+	left: 85%;
+	transform: translateX(85%);
+}
+
 
 /* Style for an achievement message */
 .achievement {
@@ -172,11 +184,15 @@ body::before {
     font-weight: bold;
 }
 
-.counter-text {
-	font-size: 20px;
+.prod-adjust-fullwidth {
+	visibility: visible;
 }
 
-@media screen and (max-width: 480px){
+.counter-text {
+	font-size: 18px;
+}
+
+@media screen and (max-width: 900px){
 	.mobileFullWidth{
 		width:100% !important;
 	}
@@ -187,13 +203,56 @@ body::before {
 		grid-template-columns: repeat(1, minmax(150px, 600px));
 		gap: 10px;
 	}
+}
+
+@media screen and (max-width: 480px){
+	.mobileFullWidth{
+		width:100% !important;
+	}
+
+	.message {
+		font-size: 11px;
+		height: 11px;
+	}
+	
+	.grid-container {
+		place-content: center;
+		display: grid;
+		grid-template-columns: repeat(1, minmax(150px, 600px));
+		gap: 10px;
+		padding: 20px
+	}
 
 	.title {
-		font-size: 28px;
+		font-size: 17px;
+		padding: 20px 0px;
 	}
 
 	.counter-text {
-		font-size: 20px;
+		font-size: 15px;
+		padding: 0px 0px 20px 0px;
+		font-weight: bold;;
+	}
+
+	.button-text {
+		font-size: 12px;
+		font-weight: bold;
+		white-space: nowrap;
+		text-align: left;
+	}
+
+	.prod-adjust-fullwidth {
+		visibility: hidden;
+	}
+	.prod-adjust-mobile {
+		visibility: visible;
+	}
+
+	.plus-one {
+		left: 85%;
+		transform: translateX(85%);
 	}
 }
+
+
 
