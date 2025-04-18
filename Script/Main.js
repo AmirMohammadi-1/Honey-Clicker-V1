@@ -1,14 +1,14 @@
 "use strict";
 
 		//Creating the Counter 
-		const counter = new Counter("counter", "pps", "Message Box", 'Reward Box', "Achievement Box", "Reward Box");
+		const counter = new Counter("counter", "cps", "Message Box", 'Reward Box', "Achievement Box", "Reward Box");
 		
 		//// Creating below a Button object corresponding to each Button created above
 		//BigPotato
 		const bigPotato = new ClickingButton("HoneyComb", counter);
 		
 		//The 4 types of buildings
-		const building1 = new BuildingButton("Farm", counter, 50, 1);
+		const building1 = new BuildingButton("Field", counter, 50, 1);
 		const building2 = new BuildingButton("Food truck", counter, 5000, 5);
 		const building3 = new BuildingButton("Chips factory", counter, 50000, 50);
 		const building4 = new BuildingButton("Potato cloner", counter, 200000, 250);

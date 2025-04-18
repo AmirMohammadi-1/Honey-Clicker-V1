@@ -252,10 +252,10 @@ class UpgradeButton extends buyableButton{
 	static get #UPGRADE_COST_INCREASE(){return 5;}//how much the upgrade cost increase after each purcahse
 
 	//constructor:
-	constructor(name, counter, price, multiplier, buidlingButton){
+	constructor(name, counter, price, multiplier, buidingButton){
 		super(name, counter, price);
 		this.#multiplier = multiplier;
-		this.#buildingButton = buidlingButton;
+		this.#buildingButton = buidingButton;
 		this.#numberOfUpgrades = 0;//possibly useful for future programmers how many times somethings been upgraded.
 	}
 
@@ -317,7 +317,7 @@ class BonusButton extends Button{
 		this.counter.updateMultiplier(this.#multiplier);//increases the multiplier
 
 		//shows a message for how much and how long the pps gets increased
-		this.counter.showMessageReward(`multiplying pps by ${this.#multiplier} for ${this.#duration} seconds`);
+		this.counter.showMessageReward(`multiplying cps by ${this.#multiplier} for ${this.#duration} seconds`);
 
 		//timer to have the increase pps stop after a certain duration
 		setTimeout(() => {this.counter.updateMultiplier(1/this.#multiplier);},
