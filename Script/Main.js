@@ -11,8 +11,8 @@
 		const building0 = new BuildingButton("WorkerBee", counter, 50, 1);
 
 		//The 4 types of buildings
-		const building1 = new BuildingButton("Field", counter, 50, 1);
-		const building2 = new BuildingButton("Hive", counter, 5000, 5);
+		const building1 = new BuildingButton("Field", counter, 500, 5);
+		const building2 = new BuildingButton("Hive", counter, 5000, 25);
 		const building3 = new BuildingButton("Apiary", counter, 50000, 50);
 		const building4 = new BuildingButton("Green House", counter, 200000, 250);
 		
