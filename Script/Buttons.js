@@ -163,7 +163,26 @@ class ClickingButton extends Button{
 	clickAction(){
 		this.counter.increment(ClickingButton.#CLICK_INCREMENT);//increment up a comb
 		this.counter.showMessage("+1");//prints to show a comb was added
+
+		// 5 new pop sounds for the main click action
+		const pop1 = new Audio("Audio/Pop1.mp3");
+		const pop2 = new Audio("Audio/Pop2.mp3");
+		const pop3 = new Audio("Audio/Pop3.mp3");
+		const pop4 = new Audio("Audio/Pop4.mp3");
+		const pop5 = new Audio("Audio/Pop5.mp3");
+
+		// makes an array of pop sounds
+		const popSounds = [pop1, pop2, pop3, pop4, pop5];
+
+		// chooses a pop sound from said array randomly
+		const chosenSound = popSounds[Math.floor(Math.random() * popSounds.length)];
+
+		// lowers initial volume, then plays for the user
+		chosenSound.volume = 0.2;
+		chosenSound.play();
 	}
+
+	
 
 }
 
