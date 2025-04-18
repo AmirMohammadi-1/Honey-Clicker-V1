@@ -1,10 +1,4 @@
 //-----------------------------------------
-// NAME		: Amir Mohammadi
-// STUDENT NUMBER	: 8001284
-// COURSE		: COMP 2150
-// INSTRUCTOR	: Heather Matheson
-// ASSIGNMENT	: assignment 4
-//
 // REMARKS: This program creates an interactive comb clicker idle game with several components, with the point of
 //the game is to increase your pps (comb's per second) and the speed at which you get them. it is a visual
 //interactive game with a default 1pps, a big comb you can click to get one comb each time, buildings to increase
@@ -23,7 +17,6 @@ class Counter
 {
 	// CLASS: Counter
 	//
-	// Author: Amir Mohammadi, 8001284
 	//
 	// REMARKS: This class is an overarching logic that handles how the comb's are counted up, the frame rate of the
 	//screen, enabling the clickablilty features and other logic needed for the comb clicker game.

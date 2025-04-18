@@ -1,10 +1,4 @@
 //-----------------------------------------
-// NAME		: Amir Mohammadi
-// STUDENT NUMBER	: 8001284
-// COURSE		: COMP 2150
-// INSTRUCTOR	: Heather Matheson
-// ASSIGNMENT	: assignment 4
-//
 // REMARKS: This program creates an interactive comb clicker idle game with several components, with the point of
 //the game is to increase your pps (comb's per second) and the speed at which you get them. it is a visual
 //interactive game with a default 1pps, a big comb you can click to get one comb each time, buildings to increase
@@ -25,7 +19,6 @@ class Button
 {
 	// CLASS: Button
 	//
-	// Author: Amir Mohammadi, 8001284
 	//
 	// REMARKS: This class is an abstract overarching class that all clickable buttons fall under. allows visual
 	//interactive button clicking and each subclass is a different kind of button that can be clicked.
@@ -98,7 +91,6 @@ class Button
 class buyableButton extends Button{
 	// CLASS: Button
 	//
-	// Author: Amir Mohammadi, 8001284
 	//
 	// REMARKS: This class is a subclass of Button, meaning it is a clickable object however this is also an abstract
 	//class (no instance can be made of this) this is a specificaiton of button meant to buttons that can be pressed
@@ -150,7 +142,6 @@ class buyableButton extends Button{
 class ClickingButton extends Button{
 	// CLASS: Button
 	//
-	// Author: Amir Mohammadi, 8001284
 	//
 	// REMARKS: This class is a subclass of button, in particular a button that can be used to click over and over again
 	//to get comb's directly (big comb button)
@@ -177,9 +168,8 @@ class ClickingButton extends Button{
 }
 
 class BuildingButton extends buyableButton{
-	// CLASS: Button
+	// CLASS: BuidlingButton
 	//
-	// Author: Amir Mohammadi, 8001284
 	//
 	// REMARKS: This class is a button, but more specifically a button with a purchase related to it so it extends
 	//buyableButton. this class allows to buy a building which enhances the pps, each building costs something else
@@ -248,9 +238,8 @@ class BuildingButton extends buyableButton{
 
 
 class UpgradeButton extends buyableButton{
-	// CLASS: Button
+	// CLASS: upgradeButton
 	//
-	// Author: Amir Mohammadi, 8001284
 	//
 	// REMARKS: This class is a buyableButton that allows an upgrade to the a buildings pps to be purchased. after a
 	//purchase of this the cost of the next upgrade greatly increases.
@@ -299,9 +288,8 @@ class UpgradeButton extends buyableButton{
 }
 
 class BonusButton extends Button{
-	// CLASS: Button
+	// CLASS: BonusButton
 	//
-	// Author: Amir Mohammadi, 8001284
 	//
 	// REMARKS: This class is Button, this class represents a button that applies a bonus modifier when clicked given a
 	//passed duration, however the button only appears for a short interval and disappears and reappears after a longer
