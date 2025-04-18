@@ -9,15 +9,15 @@
 		
 		//The 4 types of buildings
 		const building1 = new BuildingButton("Field", counter, 50, 1);
-		const building2 = new BuildingButton("Food truck", counter, 5000, 5);
-		const building3 = new BuildingButton("Chips factory", counter, 50000, 50);
-		const building4 = new BuildingButton("Potato cloner", counter, 200000, 250);
+		const building2 = new BuildingButton("Hive", counter, 5000, 5);
+		const building3 = new BuildingButton("Apiary", counter, 50000, 50);
+		const building4 = new BuildingButton("Green House", counter, 200000, 250);
 		
 		//The 4 types of building upgrades
-		const upgrade1 = new UpgradeButton("Harvester", counter, 5000, 2, building1);
-		const upgrade2 = new UpgradeButton("Poutine maker", counter, 50000, 2, building2);
-		const upgrade3 = new UpgradeButton("Instant fryer", counter, 500000, 2, building3);
-		const upgrade4 = new UpgradeButton("Advanced DNA", counter, 2000000, 2, building4);
+		const upgrade1 = new UpgradeButton("Pollination", counter, 5000, 2, building1);
+		const upgrade2 = new UpgradeButton("Hatchery", counter, 50000, 2, building2);
+		const upgrade3 = new UpgradeButton("Queen Bee", counter, 500000, 2, building3);
+		const upgrade4 = new UpgradeButton("Bee Keeper", counter, 2000000, 2, building4);
 		
 		//Creating the 5 types of bonus buttons and adding them to the counter
 
