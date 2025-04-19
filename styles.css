@@ -203,6 +203,12 @@ body::before {
 	visibility: visible;
 }
 
+.prod-adjust-mobile {
+	visibility: hidden;
+	display: none;
+}
+
+
 .counter-text {
 	font-size: 18px;
 }
@@ -268,6 +274,7 @@ body::before {
 	}
 	.prod-adjust-mobile {
 		visibility: visible;
+		display:contents;
 	}
 
 	.plus-one {

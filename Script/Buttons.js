@@ -225,7 +225,7 @@ class BuildingButton extends buyableButton{
 
 			//update the buttons text
 			this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost:
-			${Math.floor(this.price)}<br>adds ${this.#rate} cps`);
+			${Math.floor(this.price)}<br>Adds: ${this.#rate} cps`);
 
 			const sound2 = new Audio('Audio/BeeBuzz.mp3');
         	sound2.play();
@@ -246,7 +246,7 @@ class BuildingButton extends buyableButton{
 		this.#rate *= multiplier;//increases the rate how much it costs.
 		//updates text to reflect
 		this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost: <br>
-			${Math.floor(this.price)}<br>adds ${this.#rate}pp`);
+			${Math.floor(this.price)}<br>Adds: ${this.#rate} cps`);
 	}
 
 	get numberOfBuilding(){
