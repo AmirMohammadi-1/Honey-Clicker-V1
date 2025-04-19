@@ -235,11 +235,21 @@ class BuildingButton extends buyableButton{
         	sound2.play();
 
 			if (this.name == "WorkerBee") { // "spawns" a WorkerBee!
+
+				WorkerBeeNum++; // Increment WorkerBeeNum
+
 				// WorkerBeeBox global var is called, and a new "orbiter" (WorkerBee) is appended to the end of the box
 				WorkerBeeBox.insertAdjacentHTML(
 					"beforeend",
 					`<div class="orbiter" style="--i: ${WorkerBeeNum}"></div>` // Dynamically adds more WorkerBees based on number of global bees
 				  );
+
+				// Check for "swarm" threshold, and play audio accordingly
+				if (WorkerBeeNum >= 10) {
+					const swarm = new Audio("Audio/Swarm.mp3");
+					swarm.loop = true;
+					swarm.play();
+				}
 			}
 		} 
 	}

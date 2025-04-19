@@ -26,16 +26,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }, intervalTime);
     };
     fadeInMusic();
-
-
-    // Click sound for the potato button
-    const playClickSound = () => {
-        const sound = new Audio('Audio/MainPop.mp3');
-        sound.play();
-    };
-
-    const bigPotato = document.getElementById('BigPotato');
-    if (bigPotato) {
-        bigPotato.addEventListener('click', playClickSound);
-    }
 });
