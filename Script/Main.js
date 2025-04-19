@@ -17,10 +17,10 @@
 		const building4 = new BuildingButton("Green House", counter, 200000, 250);
 		
 		//The 4 types of building upgrades
-		const upgrade1 = new UpgradeButton("Pollination", counter, 5000, 2, building1);
-		const upgrade2 = new UpgradeButton("Hatchery", counter, 50000, 2, building2);
-		const upgrade3 = new UpgradeButton("Queen Bee", counter, 500000, 2, building3);
-		const upgrade4 = new UpgradeButton("Bee Keeper", counter, 2000000, 2, building4);
+		const upgrade1 = new UpgradeButton("Pollination", counter, 5000, 1.2, building1);
+		const upgrade2 = new UpgradeButton("Hatchery", counter, 50000, 1.2, building2);
+		const upgrade3 = new UpgradeButton("Queen Bee", counter, 500000, 1.2, building3);
+		const upgrade4 = new UpgradeButton("Bee Keeper", counter, 2000000, 1.2, building4);
 		
 		//Creating the 5 types of bonus buttons and adding them to the counter
 

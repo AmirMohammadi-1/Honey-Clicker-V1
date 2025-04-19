@@ -252,8 +252,8 @@ class BuildingButton extends buyableButton{
 	increaseRate(multiplier){
 		//update rate via multiplying by numBuilding*multiplier*rate - numBuilding*rate
 		//because if someone wishes to add another upgrade later down the line with a diff multiplier
-		this.counter.updateRate((this.#numberOfBuilding * multiplier * this.#rate) -
-			this.#numberOfBuilding * this.#rate);
+		this.counter.updateRate(Math.floor((this.#numberOfBuilding * multiplier * this.#rate) -
+			this.#numberOfBuilding * this.#rate));
 
 		this.#rate *= multiplier;//increases the rate how much it costs.
 		//updates text to reflect
@@ -282,7 +282,7 @@ class UpgradeButton extends buyableButton{
 	#multiplier;//how much the pps gets increased by
 	#buildingButton;//building that gets upgraded
 
-	static get #UPGRADE_COST_INCREASE(){return 5;}//how much the upgrade cost increase after each purcahse
+	static get #UPGRADE_COST_INCREASE(){return 1.2;}//how much the upgrade cost increase after each purcahse
 
 	//constructor:
 	constructor(name, counter, price, multiplier, buidingButton){
@@ -298,7 +298,7 @@ class UpgradeButton extends buyableButton{
 	//param: none
 	//return: none
 	clickAction(){
-		if(this.counter.count >= this.price && this.#buildingButton.numberOfBuilding >= 1) {//checks if the user has enough to buy upgrade
+		if((this.counter.count >= this.price) && (this.#buildingButton.numberOfBuilding >= 1)) {//checks if the user has enough to buy upgrade
 
 			this.subtractCost();//subtracts the cost from our total
 
@@ -347,12 +347,14 @@ class BonusButton extends Button{
 	//return: none
 	clickAction(){
 		this.showButton()//reveals the button
-		this.counter.updateMultiplier(this.#multiplier);//increases the multiplier
+		//this.counter.updateMultiplier(this.#multiplier);//increases the multiplier
 
 
-		let rawMultiplier = Math.random() * (7.5 - 1.5) + 1.5;
+		let rawMultiplier = Math.random() * (5 - 1.5) + 1.5;
 		let mult = Math.round(rawMultiplier * 10) / 10;
 		let seconds = Math.floor(Math.random() * (60 - 5 + 1)) + 5;
+
+		this.counter.updateMultiplier(mult);//increases the multiplier
 
 		//shows a message for how much and how long the pps gets increased
 		this.counter.showMessageReward(`multiplying cps by ${mult} for ${seconds} seconds`);
