@@ -15,6 +15,10 @@
 
 "use strict"
 
+// Global vars for WorkerBee #s, and WorkerBeeBox that is appended too in the main function
+let WorkerBeeNum = 0;
+const WorkerBeeBox = document.getElementById("WorkerBeeBox");
+
 class Button
 {
 	// CLASS: Button
@@ -229,7 +233,15 @@ class BuildingButton extends buyableButton{
 
 			const sound2 = new Audio('Audio/BeeBuzz.mp3');
         	sound2.play();
-		}
+
+			if (this.name == "WorkerBee") { // "spawns" a WorkerBee!
+				// WorkerBeeBox global var is called, and a new "orbiter" (WorkerBee) is appended to the end of the box
+				WorkerBeeBox.insertAdjacentHTML(
+					"beforeend",
+					`<div class="orbiter" style="--i: ${WorkerBeeNum}"></div>` // Dynamically adds more WorkerBees based on number of global bees
+				  );
+			}
+		} 
 	}
 
 

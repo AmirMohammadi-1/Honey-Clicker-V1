@@ -170,6 +170,45 @@ body::before {
 	border-radius: 5px;
 }
 
+.worker-bee-box {
+	z-index: 5;
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 4px;
+}
+
+.orbit-container {
+	position: relative;
+	width: 300px;
+	height: 300px;
+  }
+  
+.orbiter {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	background-image: url('Figs/WorkerBeeCircler.png');
+	background-size: cover;
+
+	/* Create circular path for WorkerBee tags to follow */
+	offset-path: circle(180px at center);
+	offset-rotate: auto;
+	animation: orbit 20s linear infinite;
+	transform: rotate(180deg);
+}
+
+/* Orbit animation for WorkerBees to follow */
+@keyframes orbit {
+	from {
+		offset-distance: 0%;
+	}
+	to {
+		offset-distance: 100%;
+	}
+}
+
 .honey-comb {
 	animation: sway 2.5s ease-in-out infinite;
 	margin: 0 auto;
@@ -180,6 +219,7 @@ body::before {
 }
 
 .plus-one {
+	z-index: 10;
 	position: absolute;
 	top: 80px; /* Adjust as needed */
 	left: 85%;
