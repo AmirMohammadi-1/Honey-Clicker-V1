@@ -18,380 +18,273 @@
 // Global vars for WorkerBee #s, and WorkerBeeBox that is appended too in the main function
 let WorkerBeeNum = 0;
 const WorkerBeeBox = document.getElementById("WorkerBeeBox");
+let swarmAudio = null; // Track swarm sound globally
 
-class Button
-{
-	// CLASS: Button
-	//
-	//
-	// REMARKS: This class is an abstract overarching class that all clickable buttons fall under. allows visual
-	//interactive button clicking and each subclass is a different kind of button that can be clicked.
-	//
-	//
-	//-----------------------------------------
-
-
-	//
-	//Instance variables
-	//
+class Button {
 	#name;
 	#counter;
 	#htmlButton;
-	
-	//
-	//Class constants
-	//
+
 	static get TEXT_ATTRIBUTE() { return "-text"; }
-	
-	//
-	//Constructor
-	//
-	constructor(name, counter)
-	{
-		if(this.constructor.name === "Button"){//makes class abstract
+
+	constructor(name, counter) {
+		if (this.constructor.name === "Button") {
 			throw new Error("cannot make an instance of a button, this is abstract");
 		}
 		this.#name = name;
 		this.#counter = counter;
 		this.#htmlButton = document.getElementById(name);
-		// Add a click event listener to the button
-		this.#htmlButton.addEventListener('click', this.clickAction.bind(this)); //this has a different meaning in this context, so I need to bind my method to it
-	}
-	
-	//Updating the innerHTML text of the button 
-	//(note that not all types of buttons have text, but I placed this here to give that code to you)
-	updateText(newText)
-	{
-		document.getElementById(this.name + Button.TEXT_ATTRIBUTE).innerHTML = newText;
-	}
-	
-	//
-	//Accessors below that you might find useful
-	//
-	get name()
-	{
-		return this.#name;
-	}
-	
-	get counter()
-	{
-		return this.#counter;
-	}
-	
-	get htmlButton()
-	{
-		return this.#htmlButton;
+		this.#htmlButton.addEventListener('click', this.clickAction.bind(this));
 	}
 
-	//abstract class that enables an action when clicked.
-	//param: none
-	//return: none
-	clickAction(){
+	updateText(newText) {
+		document.getElementById(this.name + Button.TEXT_ATTRIBUTE).innerHTML = newText;
+	}
+
+	get name() { return this.#name; }
+	get counter() { return this.#counter; }
+	get htmlButton() { return this.#htmlButton; }
+
+	clickAction() {
 		throw new Error("the clickAction method is missing");
 	}
 }
 
-
-class buyableButton extends Button{
-	// CLASS: Button
-	//
-	//
-	// REMARKS: This class is a subclass of Button, meaning it is a clickable object however this is also an abstract
-	//class (no instance can be made of this) this is a specificaiton of button meant to buttons that can be pressed
-	//to purchase something (an upgrade or building for example).
-	//
-	//
-	//-----------------------------------------
-
-	//instance var:
+class buyableButton extends Button {
 	#price;
 	#basePrice;
 
-
-	//constructor:
 	constructor(name, counter, price) {
-		super(name,counter);
-		if(this.constructor.name ==="buyableButton"){//makes abstract
+		super(name, counter);
+		if (this.constructor.name === "buyableButton") {
 			throw new Error("cannot make an instance of a buyable button ");
 		}
 		this.#price = price;
 		this.#basePrice = price;
 	}
 
-
-	subtractCost(){//removes the comb's that were needed to buy
-		this.counter.increment(-this.#price);//remove the combs just used to buy the upgrade
+	subtractCost() {
+		this.counter.increment(-this.#price);
 	}
 
-	//getters and setters:
-	get price(){
-		return this.#price;
-	}
+	get price() { return this.#price; }
+	set price(value) { this.#price = value; }
 
-	updatePrice(numOfObject){
+	updatePrice(numOfObject) {
 		this.#price = this.#basePrice * Math.pow(1.15, numOfObject);
 	}
-
-	/*
-	increaseCost(numOfObject){
-		this.#price = this.#basePrice * Math.pow(1.15, numOfObject);
-	}
-
-	 */
-
-
-
 }
 
-class ClickingButton extends Button{
-	// CLASS: Button
-	//
-	//
-	// REMARKS: This class is a subclass of button, in particular a button that can be used to click over and over again
-	//to get comb's directly (big comb button)
-	//
-	//
-	//-----------------------------------------
-	static get #CLICK_INCREMENT(){return 1;}//value to increment a comb when clicked
+class ClickingButton extends Button {
+	static get #CLICK_INCREMENT() { return 1; }
 
-
-	//constructor:
-	constructor(name, counter){
+	constructor(name, counter) {
 		super(name, counter);
 	}
 
+	clickAction() {
+		this.counter.increment(ClickingButton.#CLICK_INCREMENT);
+		this.counter.showMessage("+1");
 
-	//purpose: action performed when clicking a button (big comb), adds 1 comb to our inventory and prints to reflect
-	//param: none
-	//return: none
-	clickAction(){
-		this.counter.increment(ClickingButton.#CLICK_INCREMENT);//increment up a comb
-		this.counter.showMessage("+1");//prints to show a comb was added
-
-		// 5 new pop sounds for the main click action
-		const pop1 = new Audio("Audio/Pop1.mp3");
-		const pop2 = new Audio("Audio/Pop2.mp3");
-		const pop3 = new Audio("Audio/Pop3.mp3");
-		const pop4 = new Audio("Audio/Pop4.mp3");
-		const pop5 = new Audio("Audio/Pop5.mp3");
-
-		// makes an array of pop sounds
-		const popSounds = [pop1, pop2, pop3, pop4, pop5];
-
-		// chooses a pop sound from said array randomly
-		const chosenSound = popSounds[Math.floor(Math.random() * popSounds.length)];
-
-		// lowers initial volume, then plays for the user
-		chosenSound.volume = 0.2;
-		chosenSound.play();
+		const sounds = ["Pop1", "Pop2", "Pop3", "Pop4", "Pop5"];
+		const chosen = `Audio/${sounds[Math.floor(Math.random() * sounds.length)]}.mp3`;
+		const audio = new Audio(chosen);
+		audio.volume = 0.2;
+		audio.play();
 	}
-
-	
-
 }
 
-class BuildingButton extends buyableButton{
-	// CLASS: BuidlingButton
-	//
-	//
-	// REMARKS: This class is a button, but more specifically a button with a purchase related to it so it extends
-	//buyableButton. this class allows to buy a building which enhances the pps, each building costs something else
-	//and increases cost to buy by a set rate after each purchase
-	//
-	//
-	//-----------------------------------------
-
-	//private instance variables:
+class BuildingButton extends buyableButton {
 	#rate;
 	#numberOfBuilding;
 
-	static get #BUILDING_PRICE_INCREASE(){return 1.5}//how much the building increase by
+	static get #BUILDING_PRICE_INCREASE() { return 1.5 }
 
-	//constructor:
-	constructor(name, counter, price, rate){
+	constructor(name, counter, price, rate) {
 		super(name, counter, price);
-		this.#rate = rate;
-		this.#numberOfBuilding = 0;//counter for how many buildings there are
+		this.#rate = rate ?? 1;
+		this.#numberOfBuilding = 0;
 	}
 
+	saveState() {
+		const key = `building_${this.name}`;
+		const data = {
+			numberOfBuildings: this.#numberOfBuilding,
+			price: this.price,
+			rate: this.#rate
+		}
+		localStorage.setItem(key, JSON.stringify(data));
+	}
 
-	//performs an action when clicked, that is purchase the building, increase pps and increase building cost based
-	//on the buildings instance variables and how many buildings there are.
-	//param: none
-	//return: none
-	clickAction(){
-		if(this.counter.count >= this.price) {//if the user has enough comb's the buy the buidling
-			this.subtractCost();
-			this.#numberOfBuilding++;//increase the number of buildings
-			this.counter.updateRate(this.#rate);//update the rate at which combs are being produced per sec.
-			this.updatePrice(this.#numberOfBuilding);//updates the price of building
+	async loadState(buildings, upgrades) {
+		const key = `building_${this.name}`;
+		const savedData = localStorage.getItem(key);
 
+		if (savedData) {
+			const data = JSON.parse(savedData);
+			this.#numberOfBuilding = data.numberOfBuildings;
+			this.price = data.price ?? 10;
+			this.#rate = data.rate ?? 1;
+	 }
 
-			//update the buttons text
-			this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost:
-			${Math.floor(this.price)}<br>Adds: ${this.#rate} cps`);
+		// Always apply rate and update text
+		this.counter.updateRate(this.#numberOfBuilding * this.#rate);
+		this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost: ${Math.floor(this.price)}<br>Adds: ${Math.floor(this.#rate)} cps`);
 
-			const sound2 = new Audio('Audio/BeeBuzz.mp3');
-        	sound2.play();
-
-			if (this.name == "WorkerBee") { // "spawns" a WorkerBee!
-
-				WorkerBeeNum++; // Increment WorkerBeeNum
-
-				// WorkerBeeBox global var is called, and a new "orbiter" (WorkerBee) is appended to the end of the box
+		if (this.name === 'WorkerBee') {
+			WorkerBeeBox.innerHTML = "";
+			WorkerBeeNum = 0;
+			for (let i = 0; i < this.#numberOfBuilding; i++) {
+				WorkerBeeNum++;
 				WorkerBeeBox.insertAdjacentHTML(
 					"beforeend",
-					`<div class="orbiter" style="--i: ${WorkerBeeNum}"></div>` // Dynamically adds more WorkerBees based on number of global bees
-				  );
+					`<div class="orbiter" style="--i: ${WorkerBeeNum}"></div>`
+				);
+				await new Promise(resolve => setTimeout(resolve, 300));
+			}
+		}
+	}
 
-				// Check for "swarm" threshold, and play audio accordingly
-				if (WorkerBeeNum >= 10) {
-					const swarm = new Audio("Audio/Swarm.mp3");
-					swarm.loop = true;
-					swarm.play();
+	clickAction() {
+		if (this.counter.count >= this.price) {
+			this.subtractCost();
+			this.#numberOfBuilding++;
+			this.counter.updateRate(this.#rate);
+			this.updatePrice(this.#numberOfBuilding);
+
+			this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost: ${Math.floor(this.price)}<br>Adds: ${Math.floor(this.#rate)} cps`);
+
+			const sound2 = new Audio('Audio/BeeBuzz.mp3');
+			sound2.play();
+
+			if (this.name === "WorkerBee") {
+				WorkerBeeNum++;
+				WorkerBeeBox.insertAdjacentHTML(
+					"beforeend",
+					`<div class="orbiter" style="--i: ${WorkerBeeNum}"></div>`
+				);
+				if (WorkerBeeNum >= 10 && !swarmAudio) {
+					swarmAudio = new Audio("Audio/Swarm.mp3");
+					swarmAudio.loop = true;
+					swarmAudio.play();
 				}
 			}
-		} 
+			this.saveState();
+		}
 	}
 
-
-	//purpose: method to increase the rate of a building, effectivly applying a multiplier to the each buildings pps
-	//this method is meant to be called by outside methods
-	//param: multplier meants to multiply the rate of the building
-	//return: none
-	increaseRate(multiplier){
-		//update rate via multiplying by numBuilding*multiplier*rate - numBuilding*rate
-		//because if someone wishes to add another upgrade later down the line with a diff multiplier
-		this.counter.updateRate(Math.floor((this.#numberOfBuilding * multiplier * this.#rate) -
-			this.#numberOfBuilding * this.#rate));
-
-		this.#rate *= multiplier;//increases the rate how much it costs.
-		//updates text to reflect
-		this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost: <br>
-			${Math.floor(this.price)}<br>Adds: ${this.#rate} cps`);
+	increaseRate(multiplier) {
+		const addedRate = (this.#numberOfBuilding * multiplier * this.#rate) -
+			(this.#numberOfBuilding * this.#rate);
+		this.counter.updateRate(Math.floor(addedRate));
+		this.#rate *= multiplier;
+		this.updateText(`${this.#numberOfBuilding} ${this.name}<br>Cost: ${Math.floor(this.price)}<br>Adds: ${Math.floor(this.#rate)} cps`);
 	}
 
-	get numberOfBuilding(){
+	get numberOfBuilding() {
 		return this.#numberOfBuilding;
 	}
-
 }
 
+class UpgradeButton extends buyableButton {
+	#numberOfUpgrades;
+	#multiplier;
+	#buildingButton;
 
-class UpgradeButton extends buyableButton{
-	// CLASS: upgradeButton
-	//
-	//
-	// REMARKS: This class is a buyableButton that allows an upgrade to the a buildings pps to be purchased. after a
-	//purchase of this the cost of the next upgrade greatly increases.
-	//
-	//
-	//-----------------------------------------
-	//instance variables:
-	#numberOfUpgrades;//how many upgrades have occured
-	#multiplier;//how much the pps gets increased by
-	#buildingButton;//building that gets upgraded
+	static get #UPGRADE_COST_INCREASE() { return 1.2; }
 
-	static get #UPGRADE_COST_INCREASE(){return 1.2;}//how much the upgrade cost increase after each purcahse
-
-	//constructor:
-	constructor(name, counter, price, multiplier, buidingButton){
+	constructor(name, counter, price, multiplier, buildingButton) {
 		super(name, counter, price);
 		this.#multiplier = multiplier;
-		this.#buildingButton = buidingButton;
-		this.#numberOfUpgrades = 0;//possibly useful for future programmers how many times somethings been upgraded.
+		this.#buildingButton = buildingButton;
+		this.#numberOfUpgrades = 0;
 	}
 
+	saveState(buildings, upgrades) {
+		const key = `upgrade_${this.name}`;
+		const data = {
+			numberOfUpgrades: this.#numberOfUpgrades,
+			price: this.price,
+			multiplier: this.#multiplier
+		}
+		localStorage.setItem(key, JSON.stringify(data));
+	}
 
-	//purpose: action to be performed when the button is clicked, that is buy the upgrade, remove the cost of combs,
-	//incresae the rate of the upgraded building and increase the cost of the next upgrade.
-	//param: none
-	//return: none
-	clickAction(){
-		if((this.counter.count >= this.price) && (this.#buildingButton.numberOfBuilding >= 1)) {//checks if the user has enough to buy upgrade
+	async loadState(buildings, upgrades) {
+		const key = `upgrade_${this.name}`;
+		const savedData = localStorage.getItem(key);
 
-			this.subtractCost();//subtracts the cost from our total
+		if (savedData) {
+			const data = JSON.parse(savedData);
+			this.#numberOfUpgrades = data.numberOfUpgrades;
+			this.price = data.price ?? this.price;
+			this.#multiplier = data.multiplier ?? this.#multiplier;
 
+			for (let i = 0; i < this.#numberOfUpgrades; i++) {
+				this.#buildingButton.increaseRate(this.#multiplier);
+			}
 
-			this.#numberOfUpgrades++;//increments the number of upgrades to reflect the purchase
-			this.updatePrice(this.#numberOfUpgrades);//update the price of upgrade
-
-			this.#buildingButton.increaseRate(this.#multiplier);//increase the rate of the building
-
-			//prints out the new button for upgrades reflecting the changes:
-			this.updateText(`${this.#numberOfUpgrades} ${this.name}<br>Cost: <br> ${this.price}<br> increases 
+			this.updateText(`${this.#numberOfUpgrades} ${this.name}<br>Cost: <br> ${Math.floor(this.price)}<br> increases 
 				${this.#buildingButton.name} <br> Prod by x${UpgradeButton.#UPGRADE_COST_INCREASE}`);
-				
+		}
+	}
+
+	clickAction() {
+		if (this.counter.count >= this.price && this.#buildingButton.numberOfBuilding >= 1) {
+			this.subtractCost();
+			this.#numberOfUpgrades++;
+			this.updatePrice(this.#numberOfUpgrades);
+			this.#buildingButton.increaseRate(this.#multiplier);
+
+			this.updateText(`${this.#numberOfUpgrades} ${this.name}<br>Cost: <br> ${Math.floor(this.price)}<br> increases 
+				${this.#buildingButton.name} <br> Prod by x${UpgradeButton.#UPGRADE_COST_INCREASE}`);
+
 			const sound3 = new Audio('Audio/combOverdrive.mp3');
-			sound3.play();	
+			sound3.play();
+			this.saveState();
 		}
 	}
 }
 
-class BonusButton extends Button{
-	// CLASS: BonusButton
-	//
-	//
-	// REMARKS: This class is Button, this class represents a button that applies a bonus modifier when clicked given a
-	//passed duration, however the button only appears for a short interval and disappears and reappears after a longer
-	//interval (90 seconds)
-	//
-	//
-	//-----------------------------------------
+class BonusButton extends Button {
+	#multiplier;
+	#duration;
 
-	//instance variables:
-	#multiplier;//how much the pps gets increased by
-	#duration;//how long the effect lasts
-
-	//constructor:
 	constructor(name, counter, multiplier, duration) {
 		super(name, counter);
 		this.#multiplier = multiplier;
 		this.#duration = duration;
 	}
 
+	clickAction() {
+		this.showButton();
 
-	//purpose: action performed after button has been clicked, hides button after being clicked, increases the total
-	//pps for a short duration then reverts back to normal.
-	//param: none
-	//return: none
-	clickAction(){
-		this.showButton()//reveals the button
-		//this.counter.updateMultiplier(this.#multiplier);//increases the multiplier
+		const raw = Math.random() * (5 - 1.5) + 1.5;
+		const mult = Math.round(raw * 10) / 10;
+		const seconds = Math.floor(Math.random() * (60 - 5 + 1)) + 5;
 
-
-		let rawMultiplier = Math.random() * (5 - 1.5) + 1.5;
-		let mult = Math.round(rawMultiplier * 10) / 10;
-		let seconds = Math.floor(Math.random() * (60 - 5 + 1)) + 5;
-
-		this.counter.updateMultiplier(mult);//increases the multiplier
-
-		//shows a message for how much and how long the pps gets increased
+		this.counter.updateMultiplier(mult);
 		this.counter.showMessageReward(`multiplying cps by ${mult} for ${seconds} seconds`);
 
-		//timer to have the increase pps stop after a certain duration
-		setTimeout(() => {this.counter.updateMultiplier(1/mult);},
-			seconds * Counter.SECOND_IN_MS);
-		this.hideButton(); //hides the button
+		setTimeout(() => {
+			this.counter.updateMultiplier(1 / mult);
+		}, seconds * Counter.SECOND_IN_MS);
+
+		this.hideButton();
 
 		const sound4 = new Audio('Audio/PowerUp.mp3');
 		sound4.play();
 	}
 
-	//to make button visible:
-	//param: none
-	//return: none
 	showButton() {
 		this.htmlButton.classList.remove("hidden");
 	}
 
-	//to make the button not visible:
-	//param: none
-	//return: none
 	hideButton() {
 		this.htmlButton.classList.add("hidden");
 	}
 }
+
 
 
 

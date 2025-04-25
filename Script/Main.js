@@ -15,6 +15,8 @@
 		const building2 = new BuildingButton("Hive", counter, 5000, 25);
 		const building3 = new BuildingButton("Apiary", counter, 50000, 50);
 		const building4 = new BuildingButton("Green House", counter, 200000, 250);
+
+		const buildings = [building0, building1, building2, building3, building4]
 		
 		//The 4 types of building upgrades
 		const upgrade1 = new UpgradeButton("Pollination", counter, 5000, 1.2, building1);
@@ -22,14 +24,11 @@
 		const upgrade3 = new UpgradeButton("Queen Bee", counter, 500000, 1.2, building3);
 		const upgrade4 = new UpgradeButton("Bee Keeper", counter, 2000000, 1.2, building4);
 		
+		const upgrades = [upgrade1, upgrade2, upgrade3, upgrade4]
+
 		//Creating the 5 types of bonus buttons and adding them to the counter
 
-		// Old bonuses are commented out below
-		// counter.addBonusButton(new BonusButton("Sweet Potato Bonus", counter, 2, 10));
-		// counter.addBonusButton(new BonusButton("Red Potato Bonus", counter, 3, 15));
-		counter.addBonusButton(new BonusButton("HoneyPot", counter, 5, 20));
-		// counter.addBonusButton(new BonusButton("Blue Potato Bonus", counter, 7, 25));
-		// counter.addBonusButton(new BonusButton("Yukon Gold Bonus", counter, 10, 30));
+	    counter.addBonusButton(new BonusButton("HoneyPot", counter, 5, 20));
 
 		// Function for allowing HoneyCombBackdrop to fade in at half scroll
 		window.addEventListener('scroll', () => {
@@ -45,3 +44,18 @@
 		
 			document.querySelector('.background-layer.honey').style.opacity = opacity;
 		  });
+		
+		function loadGame(buildings, upgrades) {
+			buildings.forEach(b => b.loadState());
+			upgrades.forEach(b => b.loadState());
+		}
+		
+		function saveGame(buildings, upgrades) {
+			buildings.forEach(b => b.saveState());
+			upgrades.forEach(b => b.saveState());
+		}
+
+		window.addEventListener("load", () => {
+			loadGame(buildings, upgrades);
+		});
+		

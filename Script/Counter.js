@@ -42,6 +42,8 @@ class Counter
 	#bonusButtonIntervalTracker;//count how many bonus buttons there are.
 
 	#bonusInterval;
+
+	#playerData;
 	
 	//
 	//Class constants
@@ -54,7 +56,7 @@ class Counter
 	//
 	//Constructor
 	//
-	constructor(name, cps, messageBox, messageRewardBox, achievementBox, rewardBox)
+	constructor(name, cps, messageBox, messageRewardBox, achievementBox, rewardBox, playerData)
 	{
 		this.#count = 0;
 		this.#name = name;
@@ -64,7 +66,19 @@ class Counter
 		this.#htmlMessageRewardBox = document.getElementById(messageRewardBox);
 		this.#htmlAchievement = document.getElementById(achievementBox);
 		this.#htmlRewardBox = document.getElementById(rewardBox);
-		this.#rate = 1;
+
+		// Local storage data
+		this.#playerData = {
+			count: this.#count,
+			rate: this.#rate,
+		};
+
+		const savedRate = localStorage.getItem("rate");
+		const savedCount = localStorage.getItem("count");
+		
+		this.#rate = savedRate !== null && !isNaN(Number(savedRate)) ? Number(savedRate) : 0;
+		this.#count = savedCount !== null && !isNaN(Number(savedCount)) ? Number(savedCount) : 0;
+
 		this.#multiplier = 1;
 		this.#initCounter();
 
@@ -78,6 +92,8 @@ class Counter
 		this.kachingSound = new Audio('Audio/kaching.mp3');
 		this.kachingSound.volume = 0.3;
 		this.kachingSound.preload = "auto";
+
+		
 	}
 
 	randomBonusInterval(){
@@ -87,12 +103,14 @@ class Counter
 	//Top secret...
 	cheatCode()
 	{
-		this.#count = 50000000;
+		this.#playerData.count = 50000000;
 	}
 
 	cheatCodeTwo(){
-		this.#count = 10000;
+		this.#playerData.count = 10000;
 	}
+
+	
 	
 	//Method that regularly updates the counter and pps texts
 	//------------------------------------------------------
@@ -107,28 +125,66 @@ class Counter
 	//------------------------------------------------------
 	#updateCounter() 
 	{
-		//
-		this.#count += (this.#rate * this.#multiplier) * (Counter.#INTERVAL / Counter.SECOND_IN_MS);
+		
+		// Introduces localStorage to the picture
+		let lsCount = JSON.parse(localStorage.getItem("count"));
+		this.#count = lsCount;
 
-		this.#htmlCounter.innerText = `${Math.round(this.#count)} combs`; // Display the counter
-		this.#htmlCPS.innerText = `Combs per second: ${Math.floor(this.#rate * this.#multiplier)} cps`;
+		if (lsCount >= 1 || null) {
+			const lsRate = JSON.parse(localStorage.getItem("rate"));
+			this.#rate == lsRate;
+			this.#count += (this.#rate * this.#multiplier) * (Counter.#INTERVAL / Counter.SECOND_IN_MS);
 
-		//prints achievements on powers of 10:
-		if(this.#count >= this.#moduloTracker){
-			this.showMessage(`${this.#moduloTracker} achieved!`, Counter.DEFAULT_MESSAGE_DURATION,
-				true);
-			this.#moduloTracker *= 10;
-		}
+			this.#htmlCounter.innerText = `${Math.round(this.#count)} combs`; // Display the counter
+			this.#htmlCPS.innerText = `Combs per second: ${Math.floor(this.#rate * this.#multiplier)} cps`;
+			this.#playerData.rate = this.#rate;
+			this.#playerData.count = this.#count;
+	
+			// Set local once per storage per page update
+			localStorage.setItem("count", this.#playerData.count);
+			localStorage.setItem("rate", this.#playerData.rate);
+	
+			//prints achievements on powers of 10:
+			if(this.#count >= this.#moduloTracker){
+				this.showMessage(`${this.#moduloTracker} achieved!`, Counter.DEFAULT_MESSAGE_DURATION,
+					true);
+				this.#moduloTracker *= 10;
+			}
+	
+			//uses the fact this method handles intervals and converts those to seconds to a create 90 second intervals
+			//between bonus combs
+			if(this.#bonusButtonIntervalTracker === this.#bonusInterval * Counter.SECOND_IN_MS){
+				this.#bonusButtonIntervalTracker = 0;
+				this.randomBonusInterval();
+				this.#bonusCycle();
+			}else{
+				this.#bonusButtonIntervalTracker += Counter.#INTERVAL;
+			}
+		} else {
+			this.#count += (this.#rate * this.#multiplier) * (Counter.#INTERVAL / Counter.SECOND_IN_MS);
 
-
-		//uses the fact this method handles intervals and converts those to seconds to a create 90 second intervals
-		//between bonus combs
-		if(this.#bonusButtonIntervalTracker === this.#bonusInterval * Counter.SECOND_IN_MS){
-			this.#bonusButtonIntervalTracker = 0;
-			this.randomBonusInterval();
-			this.#bonusCycle();
-		}else{
-			this.#bonusButtonIntervalTracker += Counter.#INTERVAL;
+			this.#htmlCounter.innerText = `${Math.round(this.#count)} combs`; // Display the counter
+			this.#htmlCPS.innerText = `Combs per second: ${Math.floor(this.#rate * this.#multiplier)} cps`;
+			this.#playerData.count = this.#count;
+				
+			localStorage.setItem("count", JSON.stringify(this.#playerData.count));
+	
+			//prints achievements on powers of 10:
+			if(this.#count >= this.#moduloTracker){
+				this.showMessage(`${this.#moduloTracker} achieved!`, Counter.DEFAULT_MESSAGE_DURATION,
+					true);
+				this.#moduloTracker *= 10;
+			}
+	
+			//uses the fact this method handles intervals and converts those to seconds to a create 90 second intervals
+			//between bonus combs
+			if(this.#bonusButtonIntervalTracker === this.#bonusInterval * Counter.SECOND_IN_MS){
+				this.#bonusButtonIntervalTracker = 0;
+				this.randomBonusInterval();
+				this.#bonusCycle();
+			}else{
+				this.#bonusButtonIntervalTracker += Counter.#INTERVAL;
+			}
 		}
 	}
 
@@ -177,6 +233,9 @@ class Counter
 	//returns: none
 	increment(amount) {
 		this.#count += amount;
+
+		// Updates locally stored count whenever HoneyComb is clicked
+		localStorage.setItem("count", JSON.stringify(this.#count));
 	}
 
 	//increments/updates the rate
