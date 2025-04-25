@@ -103,11 +103,13 @@ class Counter
 	//Top secret...
 	cheatCode()
 	{
-		this.#playerData.count = 50000000;
+		this.count = 50000000;
+		console.log("Cheat code 1 applied successfully");
 	}
 
 	cheatCodeTwo(){
-		this.#playerData.count = 10000;
+		this.count = 10000;
+		console.log("Cheat code 2 applied successfully");
 	}
 
 	
