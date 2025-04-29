@@ -11,7 +11,7 @@ From what started as a side project, we are now working dilligently to bring thi
 <strong>For the time being we are working towards:<strong>
 <em>
   <ul>
-    <li>Getting local storage save states working</li>
+    <li>Getting local storage save states working</li> ✔️
     <li>Polishing UI components</li>
     <li>Finalizing design, and future plans</li>
   </ul>
