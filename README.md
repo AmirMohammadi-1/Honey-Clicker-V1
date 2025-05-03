@@ -14,6 +14,7 @@ From what started as a side project, we are now working dilligently to bring thi
     <li>Getting local storage save states working ✔️</li> 
     <li>Polishing UI components</li>
     <li>Finalizing design, and future plans</li>
+    <li>Proper site hosting</li>
   </ul>
 </em>
 
